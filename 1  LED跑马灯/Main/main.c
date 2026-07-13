@@ -1,5 +1,6 @@
 #include "led.h"
 #include "../USER/KEY/key.h"
+#include "../USER/TIMER/timer.h"
 
 
 int main(void)
@@ -10,6 +11,7 @@ int main(void)
 	delay_init();		  //初始化延时函数
 	LED_Init();		    //初始化LED端口
 	key_hardware_init();	//初始化KEY端口
+	timer6_software_init();	//初始化定时器
 	
 	while(1)
 	{

@@ -67,3 +67,4 @@
 .\obj\main.o: ..\STM32F4xx_HAL_Driver\inc\stm32f4xx_hal_pcd_ex.h
 .\obj\main.o: ..\STM32F4xx_HAL_Driver\inc\stm32f4xx_hal_hcd.h
 .\obj\main.o: ..\Main\../USER/KEY/key.h
+.\obj\main.o: ..\Main\../USER/TIMER/timer.h

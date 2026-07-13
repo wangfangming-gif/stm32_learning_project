@@ -459,6 +459,11 @@
               <FileType>1</FileType>
               <FilePath>..\USER\KEY\key.c</FilePath>
             </File>
+            <File>
+              <FileName>timer.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\USER\TIMER\timer.c</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>
@@ -498,6 +503,26 @@
               <FileName>stm32f4xx_hal_rcc_ex.c</FileName>
               <FileType>1</FileType>
               <FilePath>..\STM32F4xx_HAL_Driver\src\stm32f4xx_hal_rcc_ex.c</FilePath>
+            </File>
+            <File>
+              <FileName>stm32f4xx_hal_tim.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\STM32F4xx_HAL_Driver\src\stm32f4xx_hal_tim.c</FilePath>
+            </File>
+            <File>
+              <FileName>stm32f4xx_hal_tim_ex.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\STM32F4xx_HAL_Driver\src\stm32f4xx_hal_tim_ex.c</FilePath>
+            </File>
+            <File>
+              <FileName>stm32f4xx_hal_dma.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\STM32F4xx_HAL_Driver\src\stm32f4xx_hal_dma.c</FilePath>
+            </File>
+            <File>
+              <FileName>stm32f4xx_hal_dma_ex.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\STM32F4xx_HAL_Driver\src\stm32f4xx_hal_dma_ex.c</FilePath>
             </File>
           </Files>
         </Group>
