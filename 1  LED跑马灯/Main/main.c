@@ -1,6 +1,7 @@
 #include "led.h"
 #include "../USER/KEY/key.h"
 #include "../USER/TIMER/timer.h"
+#include "../USER/BUZZER/buzzer.h"
 
 
 int main(void)
