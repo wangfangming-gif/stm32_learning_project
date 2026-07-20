@@ -5,9 +5,13 @@
 
 #include "../BSP/KEY/KEY.h"
 #include "../BSP/LCD/segment_lcd_ui.h"
+#include "../BSP/USART_YWY/usart_ywy.h"
 
 extern TIM_HandleTypeDef htim16;
 extern TIM_HandleTypeDef htim17;
+extern UART_HandleTypeDef usart_handle;
+extern DMA_HandleTypeDef usart_rx_handle;
+extern DMA_HandleTypeDef usart_tx_handle;
 
 
 extern uint8_t timer_test_flag;
@@ -100,6 +104,8 @@ void SysTick_Handler(void)
   */
 void DMA1_Channel2_3_IRQHandler(void)
 {
+	HAL_DMA_IRQHandler(&usart_tx_handle);
+	HAL_DMA_IRQHandler(&usart_rx_handle);
 }
 
 /**
@@ -142,6 +148,7 @@ void TIM17_IRQHandler(void)
   */
 void USART1_IRQHandler(void)
 {
+	HAL_UART_IRQHandler(&usart_handle);
 }
 
 /**
@@ -160,6 +167,7 @@ void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim)
 	{
 		bsp_key_10ms_scan();
 		LCD_UI_Tick10ms();
+		modbus_time_done();
 		temp_count++;
 		if(temp_count > 100)
 		{

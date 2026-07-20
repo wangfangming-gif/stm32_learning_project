@@ -323,7 +323,7 @@
             <PlainCh>0</PlainCh>
             <Ropi>0</Ropi>
             <Rwpi>0</Rwpi>
-            <wLevel>3</wLevel>
+            <wLevel>2</wLevel>
             <uThumb>0</uThumb>
             <uSurpInc>0</uSurpInc>
             <uC99>1</uC99>
@@ -563,6 +563,11 @@
               <FileName>segment_lcd_ui.c</FileName>
               <FileType>1</FileType>
               <FilePath>..\BSP\LCD\segment_lcd_ui.c</FilePath>
+            </File>
+            <File>
+              <FileName>crc.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\BSP\CRC\crc.c</FilePath>
             </File>
             <File>
               <FileName>usart_test.c</FileName>

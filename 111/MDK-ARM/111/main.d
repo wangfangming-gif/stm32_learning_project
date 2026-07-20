@@ -45,3 +45,4 @@
 111\main.o: D:\keil5\ARM\ARMCC\Bin\..\include\stdbool.h
 111\main.o: ../BSP/../BSP/LCD/segment_lcd_ui.h
 111\main.o: ../BSP/../BSP/LCD/lcd_gpio.h
+111\main.o: ../BSP/../BSP/USART_YWY/usart_ywy.h

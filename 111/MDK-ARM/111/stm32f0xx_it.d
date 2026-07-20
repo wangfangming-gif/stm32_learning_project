@@ -36,3 +36,4 @@
 111\stm32f0xx_it.o: ../BSP/../BSP/KEY/KEY.h
 111\stm32f0xx_it.o: ../BSP/../BSP/LCD/segment_lcd_ui.h
 111\stm32f0xx_it.o: D:\keil5\ARM\ARMCC\Bin\..\include\stdbool.h
+111\stm32f0xx_it.o: ../BSP/../BSP/USART_YWY/usart_ywy.h

@@ -31,6 +31,8 @@
 #include "../BSP/LCD/segment_lcd_ui.h"
 #include "../BSP/LCD/lcd_gpio.h"
 
+#include "../BSP/USART_YWY/usart_ywy.h"
+
 void key_click_handle(uint8_t key_id);
 void key_double_click_handle(uint8_t key_id);
 
@@ -56,46 +58,13 @@ void key_double_click_handle(uint8_t key_id);
 
 uint8_t timer_test_flag = 0;
 
-/* USER CODE END PV */
-
-/* Private function prototypes -----------------------------------------------*/
 void SystemClock_Config(void);
-/* USER CODE BEGIN PFP */
 
-/* USER CODE END PFP */
-
-/* Private user code ---------------------------------------------------------*/
-/* USER CODE BEGIN 0 */
-
-/* USER CODE END 0 */
-
-/**
-  * @brief  The application entry point.
-  * @retval int
-  */
 int main(void)
 {
-  /* USER CODE BEGIN 1 */
-
-  /* USER CODE END 1 */
-
-  /* MCU Configuration--------------------------------------------------------*/
-
-  /* Reset of all peripherals, Initializes the Flash interface and the Systick. */
   HAL_Init();
 
-  /* USER CODE BEGIN Init */
-
-  /* USER CODE END Init */
-
-  /* Configure the system clock */
   SystemClock_Config();
-
-  /* USER CODE BEGIN SysInit */
-
-  /* USER CODE END SysInit */
-
-  /* Initialize all configured peripherals */
 //  MX_GPIO_Init();
   MX_DMA_Init();
   MX_TIM17_Init();
@@ -105,48 +74,36 @@ int main(void)
 	ht16220_gpio_init();
 	key_init();	//初始化KEY
 	led_init();	//初始化led
+	LCD_UI_Init();
+	usart_ywy_dma_init(9600);
 
 	SEGGER_RTT_SetTerminal(0); 
 	SEGGER_RTT_WriteString(0, "Project Start\r\n");
-
 		
 	key_click_register_task(key_click_handle);
 	key_double_click_register_task(key_double_click_handle);
 	
-	LED0(1);
-	LED1(1);
-
 	LCD_UI_SetMeasurements(763, 254, 128);
-	
 	/* 高液位报警阈值1234mm，报警功能关闭 */
 	LCD_UI_SetHighLevelConfig(1234UL, false);
-	
 	/* 顶部进度条显示65% */
 	LCD_UI_SetProgressPercent(65U);
 
-	
-  /* USER CODE END 2 */
 
-  /* Infinite loop */
-  /* USER CODE BEGIN WHILE */
   while (1)
   {
-    /* USER CODE END WHILE */
-
-    /* USER CODE BEGIN 3 */
-
+		com_ywy_handle();
+		uart_ywy_send_check();
 		LCD_UI_SetMeasurements(763, 254, 128);
 		LCD_UI_Task();
 
-//		if(timer_test_flag == 1)
-//		{
-//			LED0_TOGGLE();
-//			LED1_TOGGLE();
-//			timer_test_flag = 0;
-//		}
-		
+		if(timer_test_flag == 1)
+		{
+			LED0_TOGGLE();
+			LED1_TOGGLE();
+			timer_test_flag = 0;
+		}
   }
-  /* USER CODE END 3 */
 }
 
 /**

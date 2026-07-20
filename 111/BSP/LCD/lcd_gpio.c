@@ -11,7 +11,7 @@ void ht16220_gpio_init(void)
 	
 	ht16220_gpio_initstruct.Mode = GPIO_MODE_OUTPUT_PP;
 	ht16220_gpio_initstruct.Pull = GPIO_PULLDOWN;
-	ht16220_gpio_initstruct.Speed = GPIO_SPEED_FREQ_HIGH;
+	ht16220_gpio_initstruct.Speed = GPIO_SPEED_FREQ_MEDIUM;
 	
 	ht16220_gpio_initstruct.Pin = LCD_CS_Pin;
 	HAL_GPIO_Init(LCD_CS_GPIO_Port,&ht16220_gpio_initstruct);

@@ -31,6 +31,7 @@
 "111\ht16220.o"
 "111\lcd_gpio.o"
 "111\segment_lcd_ui.o"
+"111\crc.o"
 "111\usart_test.o"
 "111\usart_ywy.o"
 --library_type=microlib --strict --scatter "111\111.sct"
