@@ -277,7 +277,7 @@
               <OCR_RVCT4>
                 <Type>1</Type>
                 <StartAddress>0x8000000</StartAddress>
-                <Size>0x10000</Size>
+                <Size>0xfc00</Size>
               </OCR_RVCT4>
               <OCR_RVCT5>
                 <Type>1</Type>
@@ -578,6 +578,16 @@
               <FileName>usart_ywy.c</FileName>
               <FileType>1</FileType>
               <FilePath>..\BSP\USART_YWY\usart_ywy.c</FilePath>
+            </File>
+            <File>
+              <FileName>flash_param.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\BSP\FLASH\flash_param.c</FilePath>
+            </File>
+            <File>
+              <FileName>usart_control.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\BSP\USART_CONTROL\usart_control.c</FilePath>
             </File>
           </Files>
         </Group>

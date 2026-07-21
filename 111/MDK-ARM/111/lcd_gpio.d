@@ -35,3 +35,4 @@
 111\lcd_gpio.o: ../Drivers/STM32F0xx_HAL_Driver/Inc/stm32f0xx_hal_tim_ex.h
 111\lcd_gpio.o: ../Drivers/STM32F0xx_HAL_Driver/Inc/stm32f0xx_hal_uart.h
 111\lcd_gpio.o: ../Drivers/STM32F0xx_HAL_Driver/Inc/stm32f0xx_hal_uart_ex.h
+111\lcd_gpio.o: ../BSP/../BSP/FLASH/flash_param.h

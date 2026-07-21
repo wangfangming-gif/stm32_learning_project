@@ -13,6 +13,7 @@
  */
 static uint8_t ht_ram[HT16220_SEG_COUNT];
 static uint8_t ht_sent_ram[HT16220_SEG_COUNT];
+static bool ht_sent_valid[HT16220_SEG_COUNT];
 static uint8_t ht_flush_index;
 
 /*
@@ -84,7 +85,8 @@ void HT16220_Init(void)
   HT16220_PortWR(1);
   HT16220_PortDATA(1);
   memset(ht_ram, 0, sizeof(ht_ram));
-  memset(ht_sent_ram, 0xFF, sizeof(ht_sent_ram));
+  memset(ht_sent_ram, 0, sizeof(ht_sent_ram));
+  memset(ht_sent_valid, 0, sizeof(ht_sent_valid));
   ht_flush_index = 0;
   ht_send_command(HT16220_CMD_SYS_EN);
   ht_send_command(HT16220_CMD_NORMAL);
@@ -139,9 +141,7 @@ uint8_t HT16220_GetSegByte(uint8_t seg)
  */
 void HT16220_RequestFullRefresh(void)
 {
-  uint8_t i;
-  for(i = 0; i < HT16220_SEG_COUNT; i++)
-    ht_sent_ram[i] = (uint8_t)~ht_ram[i];
+  memset(ht_sent_valid, 0, sizeof(ht_sent_valid));
   ht_flush_index = 0;
 }
 
@@ -158,10 +158,11 @@ bool HT16220_FlushStep(void)
     ht_flush_index++;
     if(ht_flush_index >= HT16220_SEG_COUNT)
       ht_flush_index = 0;
-    if(ht_ram[seg] != ht_sent_ram[seg])
+    if(!ht_sent_valid[seg] || ht_ram[seg] != ht_sent_ram[seg])
     {
       ht_write_seg_byte(seg, ht_ram[seg]);
       ht_sent_ram[seg] = ht_ram[seg];
+      ht_sent_valid[seg] = true;
       return true;
     }
   }
@@ -174,7 +175,7 @@ bool HT16220_IsFlushDone(void)
   uint8_t i;
   for(i = 0; i < HT16220_SEG_COUNT; i++)
   {
-    if(ht_ram[i] != ht_sent_ram[i])
+    if(!ht_sent_valid[i] || ht_ram[i] != ht_sent_ram[i])
       return false;
   }
   return true;

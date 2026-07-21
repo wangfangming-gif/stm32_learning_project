@@ -9,9 +9,14 @@
 
 extern TIM_HandleTypeDef htim16;
 extern TIM_HandleTypeDef htim17;
+
 extern UART_HandleTypeDef usart_handle;
 extern DMA_HandleTypeDef usart_rx_handle;
 extern DMA_HandleTypeDef usart_tx_handle;
+
+extern UART_HandleTypeDef usart2_handle;
+extern DMA_HandleTypeDef usart2_rx_handle;
+extern DMA_HandleTypeDef usart2_tx_handle;
 
 
 extern uint8_t timer_test_flag;
@@ -113,6 +118,8 @@ void DMA1_Channel2_3_IRQHandler(void)
   */
 void DMA1_Channel4_5_IRQHandler(void)
 {
+	HAL_DMA_IRQHandler(&usart2_tx_handle);
+	HAL_DMA_IRQHandler(&usart2_rx_handle);
 }
 
 /**
@@ -156,6 +163,7 @@ void USART1_IRQHandler(void)
   */
 void USART2_IRQHandler(void)
 {
+	HAL_UART_IRQHandler(&usart2_handle);
 }
 
 /* USER CODE BEGIN 1 */

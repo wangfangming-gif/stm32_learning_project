@@ -33,3 +33,5 @@
 111\tim.o: ../Drivers/STM32F0xx_HAL_Driver/Inc/stm32f0xx_hal_tim_ex.h
 111\tim.o: ../Drivers/STM32F0xx_HAL_Driver/Inc/stm32f0xx_hal_uart.h
 111\tim.o: ../Drivers/STM32F0xx_HAL_Driver/Inc/stm32f0xx_hal_uart_ex.h
+111\tim.o: ../BSP/../BSP/FLASH/flash_param.h
+111\tim.o: D:\keil5\ARM\ARMCC\Bin\..\include\stdbool.h

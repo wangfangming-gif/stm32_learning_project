@@ -26,40 +26,22 @@
 extern "C" {
 #endif
 
-/* Includes ------------------------------------------------------------------*/
 #include "stm32f0xx_hal.h"
+#include "../BSP/FLASH/flash_param.h"
 
-/* Private includes ----------------------------------------------------------*/
-/* USER CODE BEGIN Includes */
-
-/* USER CODE END Includes */
-
-/* Exported types ------------------------------------------------------------*/
-/* USER CODE BEGIN ET */
-
-/* USER CODE END ET */
-
-/* Exported constants --------------------------------------------------------*/
-/* USER CODE BEGIN EC */
-
-/* USER CODE END EC */
-
-/* Exported macro ------------------------------------------------------------*/
-/* USER CODE BEGIN EM */
-
-/* USER CODE END EM */
-
-/* Exported functions prototypes ---------------------------------------------*/
 void Error_Handler(void);
 
-/* USER CODE BEGIN EFP */
-
-/* USER CODE END EFP */
-
-/* Private defines -----------------------------------------------------------*/
-/* USER CODE BEGIN Private defines */
-
-/* USER CODE END Private defines */
+#define HIGH_OIL_LEVEL_ALARM_MM 0
+#define HIGH_OIL_LEVEL_WARN_MM 0
+#define LOW_OIL_LEVEL_ALRAM_MM 0
+#define LOW_OIL_LEVEL_WARN_MM 0
+#define HIGH_WATER_LEVEL_ALARM_MM 0
+#define YWY_OPEN_ALARM_FLAG 0
+#define HIGH_WATER_SHIELD_MM 30
+#define DEVICE_ID 225
+#define DEVICE_LENGTH 0
+#define OIL_COMPENSATION 0
+#define WATER_COMPENSATION 0
 
 #ifdef __cplusplus
 }

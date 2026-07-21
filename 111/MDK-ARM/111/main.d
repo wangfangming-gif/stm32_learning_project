@@ -32,6 +32,8 @@
 111\main.o: ../Drivers/STM32F0xx_HAL_Driver/Inc/stm32f0xx_hal_tim_ex.h
 111\main.o: ../Drivers/STM32F0xx_HAL_Driver/Inc/stm32f0xx_hal_uart.h
 111\main.o: ../Drivers/STM32F0xx_HAL_Driver/Inc/stm32f0xx_hal_uart_ex.h
+111\main.o: ../BSP/../BSP/FLASH/flash_param.h
+111\main.o: D:\keil5\ARM\ARMCC\Bin\..\include\stdbool.h
 111\main.o: ../Core/Inc/dma.h
 111\main.o: ../Core/Inc/tim.h
 111\main.o: ../Core/Inc/gpio.h
@@ -42,7 +44,7 @@
 111\main.o: ../BSP/../BSP/KEY/KEY.h
 111\main.o: ../BSP/../BSP/LED/LED.h
 111\main.o: ../BSP/../BSP/HT16220/ht16220.h
-111\main.o: D:\keil5\ARM\ARMCC\Bin\..\include\stdbool.h
 111\main.o: ../BSP/../BSP/LCD/segment_lcd_ui.h
 111\main.o: ../BSP/../BSP/LCD/lcd_gpio.h
 111\main.o: ../BSP/../BSP/USART_YWY/usart_ywy.h
+111\main.o: ../BSP/../BSP/USART_CONTROL/usart_control.h

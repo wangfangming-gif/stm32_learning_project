@@ -4,81 +4,84 @@
 #include <stdint.h>
 #include <stdbool.h>
 
-/*
- * 按键事件定义。
- * 按键扫描、消抖、长短按判断由用户现有按键模块完成，
- * LCD 模块只接收已经确认的“单击事件”。
- */
 typedef enum
 {
-  LCD_KEY_UP = 0,      /* 非编辑状态：上一界面；编辑状态：当前值加 1/切换 ON-OFF */
-  LCD_KEY_DOWN,        /* 非编辑状态：下一界面；阈值编辑状态：移动闪烁位 */
-  LCD_KEY_SET          /* 进入或退出设置模式 */
+  LCD_KEY_UP = 0,
+  LCD_KEY_DOWN,
+  LCD_KEY_SET
 } LCD_KeyEvent_t;
 
-/* 三个显示界面。 */
 typedef enum
 {
-  LCD_PAGE_MAIN = 0,               /* 主界面：油高、温度、水高 */
-  LCD_PAGE_HIGH_LEVEL_VALUE,       /* 高油位报警阈值设置界面 */
-  LCD_PAGE_HIGH_LEVEL_ENABLE,      /* 高油位报警启用/关闭界面 */
-  LCD_PAGE_COUNT                   /* 页面数量，仅用于循环切换 */
+  LCD_PAGE_MAIN = 0,
+  LCD_PAGE_HIGH_OIL_ALARM,
+  LCD_PAGE_HIGH_OIL_WARNING,
+  LCD_PAGE_LOW_OIL_ALARM,
+  LCD_PAGE_LOW_OIL_WARNING,
+  LCD_PAGE_HIGH_WATER_ALARM,
+  LCD_PAGE_ALARM_ENABLE,
+  LCD_PAGE_WATER_SHIELD_HEIGHT,
+  LCD_PAGE_DEVICE_ADDRESS,
+  LCD_PAGE_PROBE_LENGTH,
+  LCD_PAGE_OIL_COMPENSATION,
+  LCD_PAGE_WATER_COMPENSATION,
+  LCD_PAGE_COUNT
 } LCD_Page_t;
 
-/* LCD 需要使用的全部业务数据。 */
+/*
+ * 所有需要保存到Flash的配置参数都使用uint32_t。
+ * 数值界面显示范围为0~99999，alarm_enable只使用0或1。
+ */
 typedef struct
 {
-  int32_t oil_height_x10;          /* 油高，单位 0.1mm；763 表示 76.3mm */
-  int32_t water_height_x10;        /* 水高，单位 0.1mm */
-  int16_t temperature_x10;         /* 温度，单位 0.1℃；当前屏幕按整数℃显示 */
-  uint32_t high_level_mm;          /* 高油位报警阈值，单位 mm，范围 0~99999 */
-  uint8_t progress_percent;        /* 顶部进度条百分比，范围 0~100 */
-  bool high_level_enable;          /* true=ON，false=OFF */
+  uint32_t high_oil_alarm;
+  uint32_t high_oil_warning;
+  uint32_t low_oil_alarm;
+  uint32_t low_oil_warning;
+  uint32_t high_water_alarm;
+  uint32_t alarm_enable;
+  uint32_t water_shield_height;
+  uint32_t device_address;
+  uint32_t probe_length;
+  uint32_t oil_compensation;
+  uint32_t water_compensation;
+} LCD_UI_Config_t;
+
+typedef struct
+{
+  int32_t oil_height_x10;
+  int32_t water_height_x10;
+  int16_t temperature_x10;
+  uint8_t progress_percent;
+  LCD_UI_Config_t config;
 } LCD_UI_Data_t;
 
-/* 初始化界面状态和 HT16220。 */
 void LCD_UI_Init(void);
-
-/*
- * 每 10ms 调用一次，建议放在定时器中断。
- * 函数内部只做闪烁计数和置标志，不操作 GPIO，不会长时间占用中断。
- */
 void LCD_UI_Tick10ms(void);
-
-/*
- * 放在 main 的 while(1) 中持续调用。
- * 负责处理闪烁、重新生成显示缓存，并分步发送 LCD 数据。
- */
 void LCD_UI_Task(void);
-
-/* 用户按键模块产生单击事件后调用。 */
 void LCD_UI_KeyEvent(LCD_KeyEvent_t key);
 
-/* 更新主界面的油高、温度、水高。 */
 void LCD_UI_SetMeasurements(int32_t oil_x10, int16_t temp_x10, int32_t water_x10);
-
-/* 从 EEPROM/Flash 读取配置后，可调用该函数装载报警参数。 */
-void LCD_UI_SetHighLevelConfig(uint32_t threshold_mm, bool enable);
-
-/* 设置顶部进度条百分比，范围 0~100。 */
 void LCD_UI_SetProgressPercent(uint8_t percent);
 
-/* 获取当前界面模块中的完整数据副本。 */
+/* 从Flash读取配置后，使用该函数一次性装载全部配置。 */
+void LCD_UI_SetConfig(const LCD_UI_Config_t *config);
+void LCD_UI_GetConfig(LCD_UI_Config_t *config);
+
+/*
+ * 兼容原工程接口：
+ * threshold_mm写入高油位报警值，enable写入总报警开关。
+ */
+void LCD_UI_SetHighLevelConfig(uint32_t threshold_mm, bool enable);
+
 void LCD_UI_GetData(LCD_UI_Data_t *data);
-
-/* 获取当前页面。 */
 LCD_Page_t LCD_UI_GetPage(void);
-
-/* 判断当前是否处于设置模式。 */
 bool LCD_UI_IsEditing(void);
 
 /*
- * 配置改变回调。
- * 用户退出设置模式时调用，可在自己的工程中实现该函数，
- * 将阈值和开关状态保存到 EEPROM/Flash。
- * 默认实现为弱函数，什么也不做。
+ * 用户按SET退出设置模式后调用。
+ * 可以在用户自己的.c文件中实现同名函数，并在其中调用Flash保存函数。
  */
-void LCD_UI_ConfigChangedCallback(uint32_t threshold_mm, bool enable);
-
+void LCD_UI_ConfigChangedCallback(const LCD_UI_Config_t *config);
 
 #endif

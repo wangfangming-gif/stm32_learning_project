@@ -32,4 +32,12 @@
 111\usart_control.o: ../Drivers/STM32F0xx_HAL_Driver/Inc/stm32f0xx_hal_tim_ex.h
 111\usart_control.o: ../Drivers/STM32F0xx_HAL_Driver/Inc/stm32f0xx_hal_uart.h
 111\usart_control.o: ../Drivers/STM32F0xx_HAL_Driver/Inc/stm32f0xx_hal_uart_ex.h
+111\usart_control.o: ../BSP/../BSP/USART_FIFO/usart_test.h
+111\usart_control.o: ../BSP/../BSP/CRC/crc.h
+111\usart_control.o: ../BSP/../BSP/RTT/SEGGER_RTT.h
+111\usart_control.o: ../BSP/../BSP/RTT/SEGGER_RTT_Conf.h
+111\usart_control.o: D:\keil5\ARM\ARMCC\Bin\..\include\stdlib.h
+111\usart_control.o: D:\keil5\ARM\ARMCC\Bin\..\include\stdarg.h
+111\usart_control.o: ../BSP/../Core/Inc/stm32f0xx_it.h
+111\usart_control.o: D:\keil5\ARM\ARMCC\Bin\..\include\stdio.h
 111\usart_control.o: D:\keil5\ARM\ARMCC\Bin\..\include\string.h
